@@ -20,13 +20,20 @@ function RegistrationA() {
     const handleSubmit=(e)=>{
         e.preventDefault()
         console.log(data)
-        try{
-            axios.post('http://localhost:5000/hospital/register',data)
-            console.log("Data send successfully");
-        }
-        catch(err){
-            console.log('err',err)
-        }
+        axios.post('http://localhost:5000/hospital/register',data)
+        .then(res=>{
+            console.log(res.data)
+            if(res.data.success){
+                alert("Registration Successful")
+            }
+            else{
+                alert("Error in adding data")
+            }
+        })
+        .catch(err=> {
+            console.log('err',err);
+            alert("Error in adding data to database!");
+        });
     }
     const handleLogin=()=>{
         navigate('/admin/login')
